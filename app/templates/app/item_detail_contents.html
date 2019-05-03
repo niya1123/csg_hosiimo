@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>投稿日時</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{  item.display_date|default_if_none:"未入力"  }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>お名前</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{  item.name|default_if_none:"未入力" }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>slackの@名</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{  item.slack_name|default_if_none:"未入力" }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>部費か会費か</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{  item.get_buhi_or_kaihi_display|default_if_none:"未入力" }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>何がほしいか</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{  item.what_do_you_want|default_if_none:"未入力" }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>何故ほしいのか、その理由</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ item.why_do_you_want | default_if_none:"未入力" }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>欲しいもののURL</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ item.url|default_if_none:"未入力" }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>欲しいものの価格</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ item.price|default_if_none:"未入力" }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>作成者</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ item.created_by.get_full_name }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>作成時間</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ item.created_at|date:"Y/m/d G:i:s" }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>更新者</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ item.updated_by.get_full_name }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>更新時間</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ item.updated_at|date:"Y/m/d G:i:s" }}</p>
+    </div>
+</div>

@@ -123,13 +123,16 @@ AUTH_USER_MODEL = 'users.User'
 
 # 管理サイトのログイン機能を通常のログイン機能として使う
 # https://docs.djangoproject.com/ja/2.1/ref/settings/#login-url
-LOGIN_URL = 'admin:login'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = 'app:login'
+# LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'app:_base.html'
 
 # django-crispy-forms
 # https://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+# メールをコンソールに表示する
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # django-filter
 # https://django-filter.readthedocs.io/en/latest/ref/settings.html#filters-verbose-lookups

@@ -23,7 +23,7 @@ class UserManager(BaseUserManager):
             email = self.normalize_email(email)
 
             user = self.model(email=email, **extra_fields)
-            user.set.password(password)
+            user.set_password(password)
             user.save(using=self._db)
             
             return user
@@ -36,7 +36,7 @@ class UserManager(BaseUserManager):
             extra_fields.setdefault('is_superuser', False)
             return self._create_user(email, password, **extra_fields)
 
-        def create_superuer(self, email, password, **extra_fields):
+        def create_superuser(self, email, password, **extra_fields):
             """
             スーパーユーザは全部の権限をTrueに
             """
@@ -45,8 +45,8 @@ class UserManager(BaseUserManager):
 
             if extra_fields.get('is_staff') is not True:
                 raise ValueError('is_staffがTrueになっていません')
-            if extra_fields.get('is_super') is not True:
-                raise ValueError('is_superがTrueになっていません')
+            if extra_fields.get('is_superuser') is not True:
+                raise ValueError('is_superuserがTrueになっていません')
 
             return self._create_user(email, password, **extra_fields)
 
@@ -81,9 +81,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-class Meta:
-    verbose_name = _('user')
-    verbose_name_plural = _('users')
+    class Meta:
+        verbose_name = _('user')
+        verbose_name_plural = _('users')
 
     def get_full_name(self):
         """Return the first_name plus the last_name, with a space in

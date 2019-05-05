@@ -7,13 +7,14 @@ from .views import (ItemCreateView, ItemDeleteView, ItemDetailView,
                     ItemFilterView, ItemUpdateView)
 
 # アプリケーションのルーティング設定
+app_name = 'app'
 
 urlpatterns = [
     path('detail/<int:pk>/', ItemDetailView.as_view(), name='detail'),
     path('create/', ItemCreateView.as_view(), name='create'),
     path('update/<int:pk>/', ItemUpdateView.as_view(), name='update'),
     path('delete/<int:pk>/', ItemDeleteView.as_view(), name='delete'),
-    path('', ItemFilterView.as_view(), name='index'),
+    path('', ItemFilterView.as_view(), name='top'),
     path('login/', views.Login.as_view(), name='login'),
     path('logout/', views.Logout.as_view(), name='logout'),
     path('user_create/', views.UserCreate.as_view(), name='user_create'),

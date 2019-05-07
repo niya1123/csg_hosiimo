@@ -105,7 +105,7 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
     """
     model = Item
     form_class = ItemForm
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('app:index')
 
     def form_valid(self, form):
         """
@@ -127,7 +127,7 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
     """
     model = Item
     form_class = ItemForm
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('app:index')
 
     def form_valid(self, form):
         """
@@ -146,7 +146,7 @@ class ItemDeleteView(LoginRequiredMixin, DeleteView):
     ビュー：削除画面
     """
     model = Item
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('app:index')
 
     def delete(self, request, *args, **kwargs):
         """

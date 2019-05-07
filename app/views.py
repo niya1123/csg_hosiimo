@@ -157,6 +157,7 @@ class ItemDeleteView(LoginRequiredMixin, DeleteView):
 
         return HttpResponseRedirect(self.success_url)
 
+
 class Top(generic.TemplateView):
     template_name = 'app/_base.html'
 

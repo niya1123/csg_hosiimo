@@ -4,6 +4,7 @@ from django.utils import timezone
 from users.models import User
 # from datetime import datetime
 
+
 class Item(models.Model):
     """
     データ定義クラス
@@ -54,7 +55,7 @@ class Item(models.Model):
         verbose_name='何故ほしいのか、その理由',
     )
 
-    #欲しいものURL
+    # 欲しいものURL
     url = models.CharField(
         verbose_name='欲しいもののURL',
         max_length=100000,
@@ -62,7 +63,7 @@ class Item(models.Model):
         null=True,
     )
 
-    #欲しいものの価格
+    # 欲しいものの価格
     price = models.IntegerField(
         verbose_name='欲しいものの価格',
         blank=True,

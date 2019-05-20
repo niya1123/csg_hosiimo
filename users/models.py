@@ -8,47 +8,48 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class UserManager(BaseUserManager):
+    """
+    ユーザマネージャ。会員登録などに利用。
+    """
+    use_in_migrations = True
+
+    def _create_user(self, email, password, **extra_fields):
         """
-        ユーザマネージャ。会員登録などに利用。
+        メールアドレスでの登録を必須にするためのもの。
         """
-        use_in_migrations = True
+        if not email:
+            raise ValueError('メールを設定する必要があります')
 
-        def _create_user(self, email, password, **extra_fields):
-            """
-            メールアドレスでの登録を必須にするためのもの。
-            """
-            if not email:
-                raise ValueError('メールを設定する必要があります')
+        email = self.normalize_email(email)
 
-            email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
 
-            user = self.model(email=email, **extra_fields)
-            user.set_password(password)
-            user.save(using=self._db)
-            
-            return user
+        return user
 
-        def create_user(self, email, password, **extra_fields):
-            """
-            is_staffだけにして、is_superをFalseに。
-            """
-            extra_fields.setdefault('is_staff', False)
-            extra_fields.setdefault('is_superuser', False)
-            return self._create_user(email, password, **extra_fields)
+    def create_user(self, email, password, **extra_fields):
+        """
+        is_staffだけにして、is_superをFalseに。
+        """
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(email, password, **extra_fields)
 
-        def create_superuser(self, email, password, **extra_fields):
-            """
-            スーパーユーザは全部の権限をTrueに
-            """
-            extra_fields.setdefault('is_staff', True)
-            extra_fields.setdefault('is_superuser', True)
+    def create_superuser(self, email, password, **extra_fields):
+        """
+        スーパーユーザは全部の権限をTrueに
+        """
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
 
-            if extra_fields.get('is_staff') is not True:
-                raise ValueError('is_staffがTrueになっていません')
-            if extra_fields.get('is_superuser') is not True:
-                raise ValueError('is_superuserがTrueになっていません')
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('is_staffがTrueになっていません')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('is_superuserがTrueになっていません')
 
-            return self._create_user(email, password, **extra_fields)
+        return self._create_user(email, password, **extra_fields)
+
 
 class User(AbstractBaseUser, PermissionsMixin):
     """

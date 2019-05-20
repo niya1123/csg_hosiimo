@@ -32,6 +32,7 @@ from .models import Item
 # LoginRequiredMixin：未ログインのユーザーをログイン画面に誘導するMixin
 # 参考：https://docs.djangoproject.com/ja/2.1/topics/auth/default/#the-loginrequired-mixin
 
+
 class ItemFilterView(LoginRequiredMixin, FilterView):
     """
     ビュー：一覧表示画面
@@ -214,7 +215,8 @@ class UserCreateDone(generic.TemplateView):
 class UserCreateComplete(generic.TemplateView):
     """メール内URLアクセス後のユーザー本登録"""
     template_name = 'app/user_create_complete.html'
-    timeout_seconds = getattr(settings, 'ACTIVATION_TIMEOUT_SECONDS', 60*60*24)  # デフォルトでは1日以内
+    timeout_seconds = getattr(
+        settings, 'ACTIVATION_TIMEOUT_SECONDS', 60*60*24)  # デフォルトでは1日以内
 
     def get(self, request, **kwargs):
         """tokenが正しければ本登録."""
@@ -229,7 +231,7 @@ class UserCreateComplete(generic.TemplateView):
         # tokenが間違っている
         except BadSignature:
             return HttpResponseBadRequest()
-            
+
         # tokenは問題なし
         else:
             try:
@@ -328,10 +330,12 @@ class EmailChange(LoginRequiredMixin, generic.FormView):
             'user': user,
         }
 
-        subject_template = get_template('app/mail_template/email_change/subject.txt')
+        subject_template = get_template(
+            'app/mail_template/email_change/subject.txt')
         subject = subject_template.render(context)
 
-        message_template = get_template('app/mail_template/email_change/message.txt')
+        message_template = get_template(
+            'app/mail_template/email_change/message.txt')
         message = message_template.render(context)
         send_mail(subject, message, None, [new_email])
 
@@ -346,7 +350,8 @@ class EmailChangeDone(LoginRequiredMixin, generic.TemplateView):
 class EmailChangeComplete(LoginRequiredMixin, generic.TemplateView):
     """リンクを踏んだ後に呼ばれるメアド変更ビュー"""
     template_name = 'app/email_change_complete.html'
-    timeout_seconds = getattr(settings, 'ACTIVATION_TIMEOUT_SECONDS', 60*60*24)  # デフォルトでは1日以内
+    timeout_seconds = getattr(
+        settings, 'ACTIVATION_TIMEOUT_SECONDS', 60*60*24)  # デフォルトでは1日以内
 
     def get(self, request, **kwargs):
         token = kwargs.get('token')
@@ -367,4 +372,3 @@ class EmailChangeComplete(LoginRequiredMixin, generic.TemplateView):
             request.user.email = new_email
             request.user.save()
             return super().get(request, **kwargs)
-

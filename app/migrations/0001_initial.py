@@ -15,17 +15,25 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Item',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('display_date', models.DateTimeField(default=django.utils.timezone.now, editable=False, verbose_name='投稿日時')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
+                ('display_date', models.DateTimeField(
+                    default=django.utils.timezone.now, editable=False, verbose_name='投稿日時')),
                 ('name', models.CharField(max_length=20, verbose_name='お名前')),
-                ('slack_name', models.CharField(max_length=10000, verbose_name='slackの@名')),
-                ('buhi_or_kaihi', models.IntegerField(choices=[(1, '部費'), (2, '会費')], verbose_name='部費か会費か')),
+                ('slack_name', models.CharField(
+                    max_length=10000, verbose_name='slackの@名')),
+                ('buhi_or_kaihi', models.IntegerField(choices=[
+                 (1, '部費'), (2, '会費')], verbose_name='部費か会費か')),
                 ('what_do_you_want', models.TextField(verbose_name='何がほしいか')),
                 ('why_do_you_want', models.TextField(verbose_name='何故ほしいのか、その理由')),
-                ('url', models.CharField(blank=True, max_length=100000, null=True, verbose_name='欲しいもののURL')),
-                ('price', models.IntegerField(blank=True, null=True, verbose_name='欲しいものの価格')),
-                ('created_at', models.DateTimeField(blank=True, editable=False, null=True, verbose_name='作成時間')),
-                ('updated_at', models.DateTimeField(blank=True, editable=False, null=True, verbose_name='更新時間')),
+                ('url', models.CharField(blank=True, max_length=100000,
+                                         null=True, verbose_name='欲しいもののURL')),
+                ('price', models.IntegerField(
+                    blank=True, null=True, verbose_name='欲しいものの価格')),
+                ('created_at', models.DateTimeField(blank=True,
+                                                    editable=False, null=True, verbose_name='作成時間')),
+                ('updated_at', models.DateTimeField(blank=True,
+                                                    editable=False, null=True, verbose_name='更新時間')),
             ],
             options={
                 'verbose_name': 'サンプル',

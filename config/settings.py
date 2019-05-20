@@ -137,6 +137,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # django-filter
 # https://django-filter.readthedocs.io/en/latest/ref/settings.html#filters-verbose-lookups
 # 検索フォームのラベル表示の修正。英語の説明を消す。
+
+
 def FILTERS_VERBOSE_LOOKUPS():
     from django_filters.conf import DEFAULTS
 

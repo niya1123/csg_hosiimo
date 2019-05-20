@@ -8,6 +8,7 @@ from .models import Item
 
 User = get_user_model()
 
+
 class ItemForm(forms.ModelForm):
     """
     モデルフォーム構成クラス
@@ -18,6 +19,7 @@ class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
         fields = '__all__'
+
 
 class EmailChangeForm(forms.ModelForm):
     """メールアドレス変更フォーム"""
@@ -44,7 +46,8 @@ class LoginForm(AuthenticationForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
-            field.widget.attrs['placeholder'] = field.label  # placeholderにフィールドのラベルを入れる
+            # placeholderにフィールドのラベルを入れる
+            field.widget.attrs['placeholder'] = field.label
 
 
 class UserCreateForm(UserCreationForm):
